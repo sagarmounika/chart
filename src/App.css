@@ -1,25 +1,80 @@
-.bodyContainer {
-
-    width: 100%;
-
+.app-container {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #f6f8fb;
+    border: 1px solid #dce0e7;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-.react-datetimerange-picker__wrapper {
-    border: 1px solid rgb(210, 210, 210) !important;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.change {
+    font-size: 20px;
+}
+
+.chart-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+.range-selector-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.range-selectors button {
+    background-color: #4b8bec;
+    border: none;
+    color: #fff;
     border-radius: 5px;
-    /* width: 100% !important; */
+    padding: 5px 15px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-.layout,
-.nested-layout {
-    width: 100%;
-    /* height: 100vh; */
+.range-selectors button:hover {
+    background-color: #3576a8;
 }
 
-.nested-layout {
-    /* flex: 1; */
+.fullscreen-btn {
+    background-color: #4b8bec;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
 }
 
-html {
-    scroll-behavior: smooth;
+.fullscreen-btn:hover {
+    background-color: #3576a8;
+}
+
+.summary,
+.statistics,
+.analysis,
+.settings {
+    font-size: 18px;
+    color: #1b1e23;
+}
+
+.summary p,
+.statistics p,
+.analysis p,
+.settings p {
+    margin: 10px 0;
 }

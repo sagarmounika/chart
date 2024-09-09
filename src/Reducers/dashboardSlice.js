@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
 
 const ordersEndpoint = "https://starbakery-api.onrender.com/api/orders"
+// http://localhost:3030
 
 export const getOrdersData = createAsyncThunk(
   "dashboard/orders",
