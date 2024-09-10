@@ -12,7 +12,7 @@ const Chart = ({toggleFullScreen}) => {
   const options = {
     title: {text: ""},
     theme: "light2",
-
+    exportEnabled: true,
     charts: [
       {
         axisX: {
@@ -69,6 +69,12 @@ const Chart = ({toggleFullScreen}) => {
           fontSize: 15,
         },
       },
+    },
+    toolbar: {
+      itemBackgroundColor: "#fff",
+      itemBackgroundColorOnHover: "#4B40EE",
+      fontColor: "#d6d6d6",
+      fontColorOnHover: "#d3d3d3",
     },
   }
 
