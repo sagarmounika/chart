@@ -1,127 +1,68 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import axios from "axios"
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
-const ordersEndpoint = "https://starbakery-api.onrender.com/api/orders"
-// http://localhost:3030
+// Async thunk to fetch data
+export const fetchChartData = createAsyncThunk(
+  "dashboard/fetchChartData",
+  async () => {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = (today.getMonth() + 1).toString().padStart(2, "0")
+    const day = today.getDate().toString().padStart(2, "0")
+    const formattedDate = `${year}-${month}-${day}`
+    const apiUrl = `https://api.upstox.com/v2/historical-candle/NSE_EQ%7CINE848E01016/month/${formattedDate}`
 
-export const getOrdersData = createAsyncThunk(
-  "dashboard/orders",
-  async args => {
-    const {onSuccess, onFailure} = args
-    try {
-      const response = await axios.get(ordersEndpoint, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-     
-      onSuccess()
-      let updated = response.data.map(order => ({
-        ...order,
-        lastUpdateTime: new Date(order.lastUpdateTime.replace(" ", "T")),
-      }))
-      return updated
-    } catch (error) {
-      onFailure()
-      throw error
-    }
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+    return data.data.candles
   }
 )
 
-const initialState = {
-  selectedType: null,
-  selectedState: null,
-  selectedRegion: null,
-  startDate: null,
-  endDate: null,
-  selectedTimeRange: "month",
-  selectedLabel: "",
-  ordersData: [],
-  groupData: {
-    groupedData: [],
-    groupedTotalValueData: [],
-  },
-  timeFilteredData: [],
-}
-
 const dashboardSlice = createSlice({
   name: "dashboard",
-  initialState,
+  initialState: {
+    dataPoints: [],
+    currentPrice: 0,
+    priceChange: 0,
+    priceChangePercent: 0,
+    isLoaded: false,
+    selectedTab: 1,
+  },
   reducers: {
-    setSelectedType: (state, action) => {
-      state.selectedType = action.payload
-      state.selectedState = null
-      state.selectedRegion = null
-      state.selectedLabel = "Type"
-    },
-    setSelectedState: (state, action) => {
-      state.selectedType = null
-      state.selectedState = action.payload
-      state.selectedRegion = null
-      state.selectedLabel = "State"
-    },
-    setSelectedRegion: (state, action) => {
-      state.selectedType = null
-      state.selectedState = null
-      state.selectedRegion = action.payload
-      state.selectedLabel = "Branch"
-    },
-    clearAll: (state, action) => {
-      state.selectedType = null
-      state.selectedState = null
-      state.selectedRegion = null
-      state.selectedLabel = ""
-    },
-    setSelectedTimeRange: (state, action) => {
-      state.selectedTimeRange = action.payload
-    },
-    setStartDate: (state, action) => {
-      state.startDate = action.payload
-    },
-    setEndDate: (state, action) => {
-      state.endDate = action.payload
-    },
-    setGroupData: (state, action) => {
-      state.groupData = action.payload
-    },
-    setTimeFilteredData: (state, action) => {
-      state.timeFilteredData = action.payload
-    },
-    clearDates: (state, action) => {
-      state.startDate = null
-      state.endDate = null
+    setSelectedTab: (state, action) => {
+      state.selectedTab = action.payload
     },
   },
   extraReducers: builder => {
+     builder.addCase(fetchChartData.pending, state => {
+       state.loading = true
+       state.error = null
+     })
     builder
-      .addCase(getOrdersData.pending, state => {
-        state.loading = true
-        state.error = null
+      .addCase(fetchChartData.fulfilled, (state, action) => {
+        const candles = action.payload
+        const dps = candles.map(([timestamp, , , , close]) => ({
+          x: new Date(timestamp),
+          y: close,
+        }))
+
+        const latestClose = candles[0][4]
+        const previousClose = candles[1][4]
+        const change = latestClose - previousClose
+        const changePercent = ((change / previousClose) * 100).toFixed(2)
+
+        state.currentPrice = latestClose.toFixed(2)
+        state.priceChange = change.toFixed(2)
+        state.priceChangePercent = changePercent
+        state.dataPoints = dps.reverse()
+        state.isLoaded = true
       })
-      .addCase(getOrdersData.fulfilled, (state, action) => {
-       
-        state.loading = false
-        state.ordersData = action.payload
-      })
-      .addCase(getOrdersData.rejected, (state, action) => {
+      .addCase(fetchChartData.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message
       })
   },
 })
 
-export const {
-  setSelectedType,
-  setSelectedState,
-  setSelectedRegion,
-  setStartDate,
-  setEndDate,
-  setSelectedTimeRange,
-  setGroupData,
-  setTimeFilteredData,
-  clearAll,
-  clearDates,
-} = dashboardSlice.actions
+export const {setSelectedTab} = dashboardSlice.actions
 
 export default dashboardSlice.reducer

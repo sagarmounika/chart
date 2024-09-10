@@ -1,0 +1,25 @@
+.header {
+    padding: 2%;
+    color: #1A243A;
+
+    font-weight: 600;
+    ;
+
+    .price {
+        display: flex;
+        font-size: 2.2rem;
+        align-items: flex-start;
+
+        .symbol {
+            color: #BDBEBF;
+            font-size: 1rem;
+            margin-left: .4rem;
+        }
+
+
+    }
+
+    .change {
+        margin-top: .5rem;
+    }
+}

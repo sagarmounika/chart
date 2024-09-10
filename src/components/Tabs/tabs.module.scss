@@ -1,0 +1,58 @@
+.tabContainer {
+    font-size: .9em;
+    font-weight: 600;
+    // height: 100%;
+    // width: 100%;
+}
+
+
+.tabContainer :global .react-tabs__tab-panel {
+    height: 100%;
+    width: 100%;
+}
+
+.tabContainer :global .react-tabs__tab-list {
+    border-bottom: 2px solid #e5e7eb;
+    /* Ensuring a bottom border */
+    margin: 0;
+    padding: 0;
+    padding-left: 2rem;
+    display: flex;
+    list-style: none;
+}
+
+.tabContainer :global .react-tabs__tab {
+    padding: .2rem .9rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    /* Unselected tab border */
+    color: #5b5f97;
+    transition: color 0.1s, border-bottom-color 0.1s;
+}
+
+.tabContainer :global .react-tabs__tab--selected {
+    border-bottom: 2px solid #5b5f97 !important;
+    /* Selected tab border */
+    color: #000000 !important;
+    /* Selected tab text color */
+}
+
+.tabContainer :global .react-tabs__tab:focus {
+    outline: none;
+}
+
+.tabContainer :global .react-tabs__tab:focus:after {
+    content: '';
+    display: block;
+    // border-bottom: 2px solid #5b5f97;
+    /* Focus indicator */
+    position: relative;
+    top: 2px;
+}
+
+.tabContainer :global .react-tabs__tab:hover {
+    color: #000000;
+    /* Hover effect for better UX */
+    border-bottom-color: #5b5f97;
+    /* Hover border color */
+}
