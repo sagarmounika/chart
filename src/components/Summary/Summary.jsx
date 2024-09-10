@@ -1,5 +1,5 @@
 import React from "react"
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 import style from "./summary.module.scss"
 const Summary = () => {
   const {

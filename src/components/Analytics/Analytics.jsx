@@ -1,6 +1,6 @@
 import React from "react"
 import style from "./analytics.module.scss"
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 const Analytics = () => {
   const {dataPoints} = useSelector(state => state.dashboardReducer)
   return (

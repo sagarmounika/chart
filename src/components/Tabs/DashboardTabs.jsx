@@ -1,6 +1,5 @@
 import React from "react"
 import {Tabs, TabList, Tab, TabPanel} from "react-tabs"
-// import "react-tabs/style/react-tabs.css"
 import {useSelector, useDispatch} from "react-redux"
 import {setSelectedTab} from "../../Reducers/dashboardSlice"
 import Chart from "../ChartWrapper/Chart"
@@ -12,9 +11,7 @@ const DashboardTabs = ({toggleFullScreen}) => {
   const dispatch = useDispatch()
 
   const {
-    dataPoints,
 
-    currentPrice,
 
     selectedTab,
   } = useSelector(state => state.dashboardReducer)

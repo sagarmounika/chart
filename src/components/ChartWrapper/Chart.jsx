@@ -6,7 +6,7 @@ import style from "./chart.module.scss"
 const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart
 
 const Chart = ({toggleFullScreen}) => {
-  const {dataPoints, isLoaded, currentPrice, priceChange, priceChangePercent} =
+  const {dataPoints} =
     useSelector(state => state.dashboardReducer)
   const chartContainerRef = useRef(null)
 

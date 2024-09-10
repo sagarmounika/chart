@@ -1,14 +1,12 @@
 import React from 'react'
 import style from "./header.module.scss"
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 const Header = () => {
     const {
-      dataPoints,
-      isLoaded,
+
       currentPrice,
       priceChange,
-      priceChangePercent,
-      selectedTab,
+      priceChangePercent
     } = useSelector(state => state.dashboardReducer)
   return (
     <div className={style.header}>
