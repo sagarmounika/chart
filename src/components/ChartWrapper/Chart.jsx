@@ -6,8 +6,7 @@ import style from "./chart.module.scss"
 const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart
 
 const Chart = ({toggleFullScreen}) => {
-  const {dataPoints} =
-    useSelector(state => state.dashboardReducer)
+  const {dataPoints} = useSelector(state => state.dashboardReducer)
   const chartContainerRef = useRef(null)
 
   const options = {
@@ -37,10 +36,11 @@ const Chart = ({toggleFullScreen}) => {
           {
             name: "Price (in ₹)",
             type: "splineArea",
-            color: "#3576a8",
+            color: "#4B40EE",
             yValueFormatString: "₹#,###.##",
             xValueFormatString: "MMM DD YYYY",
             dataPoints,
+            fillOpacity: 0.1,
           },
         ],
       },
@@ -69,7 +69,6 @@ const Chart = ({toggleFullScreen}) => {
           fontSize: 15,
         },
       },
-   
     },
   }
 
