@@ -7,7 +7,7 @@ import Summary from "../Summary/Summary"
 import Analytics from "../Analytics/Analytics"
 import style from "./tabs.module.scss"
 import Statistics from "../Statistics/Statistics"
-const DashboardTabs = ({toggleFullScreen}) => {
+const DashboardTabs = () => {
   const dispatch = useDispatch()
 
   const {
@@ -34,7 +34,7 @@ const DashboardTabs = ({toggleFullScreen}) => {
         </TabPanel>
 
         <TabPanel>
-          <Chart toggleFullScreen={toggleFullScreen} />
+          <Chart />
         </TabPanel>
 
         <TabPanel>

@@ -11,16 +11,12 @@ const Dashboard = () => {
     dispatch(fetchChartData())
   }, [dispatch])
 
-  const toggleFullScreen = () => {
-    // Full screen logic goes here.
-  }
-
   return (
     <div className={style.dashboardContainer}>
       {loading && (
         <>
           <Header />
-          <DashboardTabs toggleFullScreen={toggleFullScreen} />
+          <DashboardTabs />
         </>
       )}
     </div>

@@ -1,3 +1,29 @@
-.chartContainer {
+.chartContainerWrapper {
     margin-top: 1rem;
+    height: 100%;
+
+    .btnContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 80%;
+        margin-bottom: 1rem;
+
+        .screenBtn {
+            cursor: pointer;
+            padding: .4rem .6rem;
+            display: flex;
+            background-color: white;
+            align-items: center;
+            border: 1px solid #d3d3d3;
+
+        }
+    }
+
+    .chartContainer {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+
+    }
 }
